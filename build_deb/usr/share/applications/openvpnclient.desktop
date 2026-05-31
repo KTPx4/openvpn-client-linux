@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=OpenVPN Client
+Comment=OpenVPN 3 Client GUI
+Exec=/opt/openvpnclient/openvpnclient
+Icon=openvpnclient
+Terminal=false
+Type=Application
+Categories=Network;Utility;

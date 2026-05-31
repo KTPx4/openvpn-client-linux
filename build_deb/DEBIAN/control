@@ -1,0 +1,10 @@
+Package: openvpnclient
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Depends: openvpn3, libnotify-bin
+Maintainer: Your Name <your.email@example.com>
+Description: OpenVPN 3 Client GUI
+ A modern graphical user interface for OpenVPN 3 Linux client.
+ Supports profile importing, auto-reconnect, and browser authentication.

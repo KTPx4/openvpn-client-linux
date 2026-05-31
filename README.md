@@ -1,82 +1,148 @@
 # OpenVPN 3 Client GUI
 
-Một ứng dụng GUI dành cho OpenVPN 3 trên Linux (được thiết kế giống với OpenVPN Connect trên Windows/Mac). App hỗ trợ:
-- Giao diện Dark mode hiện đại.
-- Hiển thị danh sách profile hiện có.
-- Connect / Disconnect với các file cấu hình.
-- Nút "Import Profile" để nhập các cấu hình `.ovpn`.
-- Tự động bắt link xác thực (Auth URL/SSO) và mở bằng trình duyệt tùy chọn.
-- Tính năng Advance (Cài đặt nâng cao):
-  - Thông báo khi VPN ngắt kết nối đột ngột (thông qua `notify-send` trên Linux).
-  - Tự động kết nối lại (Auto-reconnect) nếu bị rớt mạng hoặc ngắt kết nối đột ngột (không auto-reconnect nếu bấm Disconnect thủ công).
-  - Lựa chọn trình duyệt (System Default, Google Chrome, Firefox, Brave, Edge) để xử lý Auth SSO.
+A modern graphical user interface for OpenVPN 3 on Linux, designed to provide a user experience similar to OpenVPN Connect on Windows and macOS.
 
-## Yêu cầu hệ thống
+## Features
 
-- Linux Debian/Ubuntu based OS.
-- `openvpn3` đã được cài đặt.
-- `libnotify-bin` (để hiển thị thông báo desktop).
-- Python 3.
+### Core Functionality
 
-## Cách chạy ứng dụng môi trường Dev
+* Modern and responsive user interface.
+* Dark theme support.
+* Import and manage `.ovpn` configuration profiles.
+* View all available VPN profiles.
+* Connect and disconnect VPN profiles with a single click.
+* Real-time connection status monitoring.
 
-Do các phiên bản Linux mới (như Debian 12, Ubuntu 24.04) áp dụng cơ chế bảo vệ hệ thống (PEP 668), bạn bắt buộc phải dùng môi trường ảo để cài đặt thư viện.
+### Advanced Features
 
-1. Cài đặt các gói hệ thống cần thiết (để hỗ trợ tạo môi trường ảo và build):
-   ```bash
-   sudo apt update
-   sudo apt install python3-pip python3-venv libnotify-bin -y
-   ```
+* Automatic detection of OpenVPN 3 authentication URLs (SSO/Auth URL).
+* Open authentication pages using your preferred web browser.
+* Desktop notifications when the VPN connection is unexpectedly disconnected.
+* Automatic reconnection after network interruptions or unexpected disconnects.
+* Smart reconnect logic that does **not** reconnect when the user manually disconnects.
+* Configurable browser selection for SSO authentication:
 
-2. Tạo môi trường ảo (virtual environment) tại thư mục chứa code:
-   ```bash
-   python3 -m venv venv
-   ```
+  * System Default Browser
+  * Google Chrome
+  * Mozilla Firefox
+  * Brave Browser
+  * Microsoft Edge
 
-3. Kích hoạt môi trường ảo (lệnh này phải chạy mỗi khi bạn mở terminal mới):
-   ```bash
-   source venv/bin/activate
-   ```
+## System Requirements
 
-4. Cài đặt thư viện Python:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Supported Operating Systems
 
-5. Chạy ứng dụng:
-   ```bash
-   python main.py
-   ```
+* Debian-based Linux distributions
+* Ubuntu and Ubuntu-based distributions
 
-## Cách Build và Deploy ra file .deb (Không cần cài thư viện khi chạy)
+### Required Packages
 
-Sử dụng script `build_deb.sh` đi kèm để đóng gói toàn bộ app, bao gồm cả các thư viện Python (thông qua PyInstaller) thành một file `.deb` duy nhất.
+* OpenVPN 3
+* Python 3
+* `libnotify-bin` (for desktop notifications)
 
-1. Bật môi trường ảo (BẮT BUỘC để `pyinstaller` nhận diện được các thư viện đã cài):
-   ```bash
-   source venv/bin/activate
-   ```
+## Development Setup
 
-2. Hãy chắc chắn bạn đã cài đặt các thư viện trong `requirements.txt`:
-   ```bash
-   pip install -r requirements.txt
-   ```
+Modern Linux distributions such as Debian 12 and Ubuntu 24.04 implement PEP 668 protections, which require Python packages to be installed inside a virtual environment.
 
-3. Chạy script đóng gói:
-   ```bash
-   ./build_deb.sh
-   ```
+### 1. Install Required System Packages
 
-4. Script này sẽ thực hiện các bước sau:
-   - Dùng `pyinstaller` để build mã nguồn Python thành các file executable (nằm trong thư mục `dist/openvpnclient`).
-   - Tạo cấu trúc thư mục của một file `.deb` chuẩn Debian (với folder `DEBIAN`, `/opt/openvpnclient`, `/usr/share/applications/`).
-   - Copy file executable vào `/opt/openvpnclient/` và tạo file desktop để bạn có thể search app trong menu hệ thống.
-   - Build ra file cài đặt `openvpnclient_1.0.0_amd64.deb`.
+```bash
+sudo apt update
+sudo apt install python3-pip python3-venv libnotify-bin -y
+```
 
-4. Cài đặt file `.deb` đã build:
-   ```bash
-   sudo dpkg -i openvpnclient_1.0.0_amd64.deb
-   ```
-   *Lưu ý: Nếu bị thiếu dependencies, bạn có thể chạy thêm `sudo apt-get install -f`.*
+### 2. Create a Virtual Environment
 
-5. Mở ứng dụng từ Application Menu bằng cách tìm kiếm "OpenVPN Client".
+```bash
+python3 -m venv venv
+```
+
+### 3. Activate the Virtual Environment
+
+Run this command every time you open a new terminal session:
+
+```bash
+source venv/bin/activate
+```
+
+### 4. Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Launch the Application
+
+```bash
+python main.py
+```
+
+---
+
+# Building a Debian Package (.deb)
+
+The project includes a `build_deb.sh` script that packages the entire application, including all Python dependencies, into a standalone Debian package using PyInstaller.
+
+### 1. Activate the Virtual Environment
+
+```bash
+source venv/bin/activate
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Build the Package
+
+```bash
+./build_deb.sh
+```
+
+### Build Process Overview
+
+The build script automatically performs the following tasks:
+
+* Compiles the Python application into standalone executables using PyInstaller.
+* Creates a standard Debian package structure.
+* Installs application files under `/opt/openvpnclient`.
+* Generates a desktop launcher entry under `/usr/share/applications`.
+* Packages everything into a distributable Debian package.
+
+Generated output:
+
+```text
+openvpnclient_<version>_amd64.deb
+```
+
+### 4. Install the Package
+
+```bash
+sudo dpkg -i openvpnclient_1.0.0_amd64.deb
+```
+
+If dependency issues occur, run:
+
+```bash
+sudo apt-get install -f
+```
+
+### 5. Launch the Application
+
+After installation, open your system's Application Menu and search for:
+
+```text
+OpenVPN Client
+```
+
+---
+
+## Notes
+
+* OpenVPN 3 must be installed and functioning correctly before using this application.
+* Desktop notifications require the `libnotify-bin` package.
+* Auto-reconnect is only triggered for unexpected disconnects and network interruptions.
+* Manual disconnections initiated by the user will not trigger automatic reconnection.

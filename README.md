@@ -28,6 +28,16 @@ A modern graphical user interface for OpenVPN 3 on Linux, designed to provide a 
   * Brave Browser
   * Microsoft Edge
 
+## Screenshots
+
+<div align="center">
+  <img src="image_preview/main.png" width="48%" alt="Main Profile List">
+  <img src="image_preview/vpn%20details.png" width="48%" alt="VPN Connection Details">
+  <br>
+  <img src="image_preview/config_theme.png" width="48%" alt="Theme Configuration">
+  <img src="image_preview/settings.png" width="48%" alt="Advanced Settings">
+</div>
+
 ## System Requirements
 
 ### Supported Operating Systems

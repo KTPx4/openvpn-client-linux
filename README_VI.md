@@ -11,6 +11,16 @@ Một ứng dụng GUI dành cho OpenVPN 3 trên Linux (được thiết kế gi
   - Tự động kết nối lại (Auto-reconnect) nếu bị rớt mạng hoặc ngắt kết nối đột ngột (không auto-reconnect nếu bấm Disconnect thủ công).
   - Lựa chọn trình duyệt (System Default, Google Chrome, Firefox, Brave, Edge) để xử lý Auth SSO.
 
+## Hình ảnh giao diện (Screenshots)
+
+<div align="center">
+  <img src="image_preview/main.png" width="48%" alt="Main Profile List">
+  <img src="image_preview/vpn%20details.png" width="48%" alt="VPN Connection Details">
+  <br>
+  <img src="image_preview/config_theme.png" width="48%" alt="Theme Configuration">
+  <img src="image_preview/settings.png" width="48%" alt="Advanced Settings">
+</div>
+
 ## Yêu cầu hệ thống
 
 - Linux Debian/Ubuntu based OS.

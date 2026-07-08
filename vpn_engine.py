@@ -167,7 +167,7 @@ class VPNEngine(QObject):
 
     def import_config(self, file_path):
         try:
-            result = subprocess.run(["openvpn3", "config-import", "--config", file_path], capture_output=True, text=True)
+            result = subprocess.run(["openvpn3", "config-import", "--persistent", "--config", file_path], capture_output=True, text=True)
             self.log_message.emit(result.stdout)
             if result.stderr:
                 self.log_message.emit(f"Error: {result.stderr}")

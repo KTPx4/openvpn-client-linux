@@ -225,7 +225,8 @@ class MainWindow(QMainWindow):
         self.engine.sync_sessions()
 
     def init_ui(self):
-        self.setWindowTitle("OpenVPN Client")
+        app_version = os.environ.get("APP_VERSION", "v0.0.1")
+        self.setWindowTitle(f"OpenVPN Client {app_version}")
         self.setFixedSize(420, 680)
         
         self.stacked_widget = QStackedWidget()
@@ -275,6 +276,19 @@ class MainWindow(QMainWindow):
         list_layout.addLayout(header_layout)
         list_layout.addWidget(self.add_btn)
         list_layout.addWidget(self.scroll_area)
+        
+        # --- Footer ---
+        footer_layout = QHBoxLayout()
+        footer_layout.setContentsMargins(5, 5, 5, 0)
+        self.version_label = QLabel(app_version)
+        self.version_label.setObjectName("FooterLabel")
+        self.author_label = QLabel("Made with ♥ by Px4")
+        self.author_label.setObjectName("FooterLabel")
+        self.author_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        footer_layout.addWidget(self.version_label)
+        footer_layout.addStretch()
+        footer_layout.addWidget(self.author_label)
+        list_layout.addLayout(footer_layout)
         
         # --- Page 1: Detail View ---
         detail_page = QWidget()
@@ -441,6 +455,7 @@ class MainWindow(QMainWindow):
         QLabel#SpeedIn {{ font-size: 20px; font-weight: bold; color: {c['success']}; border: none; }}
         QLabel#SpeedOut {{ font-size: 20px; font-weight: bold; color: {c['accent2']}; border: none; }}
         QLabel#TotalTxt {{ color: {c['text_dim']}; font-size: 12px; border: none; }}
+        QLabel#FooterLabel {{ color: {c['text_dim']}; font-size: 11px; border: none; font-weight: 500; letter-spacing: 0.5px; }}
         
         QPushButton#AddBtn {{ 
             background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 {c['accent1']}, stop:1 {c['accent2']});
